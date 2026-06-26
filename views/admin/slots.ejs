@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Slots – Admin</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+  <%- include('../partials/navbar') %>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-title">Admin Panel</div>
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard" class="sidebar-link">🏠 Dashboard</a>
+        <a href="/admin/bookings"  class="sidebar-link">📋 Bookings</a>
+        <a href="/admin/payments"  class="sidebar-link">💰 Payments</a>
+        <a href="/admin/customers" class="sidebar-link">👥 Customers</a>
+        <a href="/admin/slots"     class="sidebar-link active">⏰ Manage Slots</a>
+        <a href="/logout"          class="sidebar-link sidebar-logout">🚪 Logout</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h1>⏰ Manage Time Slots</h1>
+        <p>Add or remove available booking slots</p>
+      </div>
+
+      <!-- Add slot form -->
+      <div class="admin-card">
+        <h2>Add New Slot</h2>
+        <form action="/admin/slots/add" method="POST" class="inline-form">
+          <input type="text" name="slot" required placeholder="e.g. 10:00 AM – 11:00 AM" class="inline-input"/>
+          <button type="submit" class="btn-primary">Add Slot</button>
+        </form>
+      </div>
+
+      <!-- Current slots -->
+      <div class="admin-card">
+        <h2>Current Slots (<%= slots.length %>)</h2>
+        <% if (slots.length === 0) { %>
+          <p class="empty-msg">No slots available. Add one above.</p>
+        <% } else { %>
+          <ul class="slots-manage-list">
+            <% slots.forEach(function(slot) { %>
+              <li class="slot-manage-item">
+                <span>⏰ <%= slot %></span>
+                <form action="/admin/slots/delete" method="POST" style="display:inline">
+                  <input type="hidden" name="slot" value="<%= slot %>"/>
+                  <button class="btn-sm btn-danger" onclick="return confirm('Remove this slot?')">Remove</button>
+                </form>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

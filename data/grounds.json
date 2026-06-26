@@ -1,0 +1,18 @@
+[
+  {
+    "id": "mens",
+    "name": "Men's Turf Ground",
+    "address": "MG Road, Vijayawada",
+    "icon": "🏏",
+    "color": "#1B4332",
+    "description": "Full-size turf with professional pitch and floodlights."
+  },
+  {
+    "id": "womens",
+    "name": "Women's Turf Ground",
+    "address": "Riverside Road, Vijayawada",
+    "icon": "🏟️",
+    "color": "#7b1d6b",
+    "description": "Dedicated turf ground with changing rooms and floodlights."
+  }
+]

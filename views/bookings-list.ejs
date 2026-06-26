@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Bookings – Cricket Turf</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="page-container">
+    <div class="page-header">
+      <h1>📋 My Bookings</h1>
+      <a href="/book" class="btn-primary">+ New Booking</a>
+    </div>
+
+    <% if (bookings.length === 0) { %>
+      <div class="empty-state">
+        <p>🏏 No bookings yet!</p>
+        <a href="/book" class="btn-primary">Book Your First Slot</a>
+      </div>
+    <% } else { %>
+      <div class="table-wrapper bookings-list-table">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Ground</th>
+              <th>Date</th>
+              <th>Time Slot</th>
+              <th>Mobile</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% bookings.forEach(function(b) { %>
+              <tr>
+                <td><code><%= b.id %></code></td>
+                <td><%= b.groundName %></td>
+                <td><%= b.bookingDate %></td>
+                <td><%= b.timeSlot %></td>
+                <td><%= b.mobile %></td>
+                <td><span class="badge badge-pay"><%= b.paymentStatus %></span></td>
+                <td><span class="badge badge-<%= b.status %>"><%= b.status %></span></td>
+                <td>
+                  <% if (b.paymentStatus !== 'Received' && b.status !== 'cancelled') { %>
+                    <a href="/pay/<%= b.id %>" class="btn-sm btn-primary">Pay Now</a>
+                  <% } else { %>
+                    <a href="/confirmation/<%= b.id %>" class="btn-sm btn-secondary">View</a>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <footer class="footer"><p>🏏 Cricket Turf Booking &copy; 2024</p></footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Confirmed – Cricket Turf</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="page-container">
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <span class="ticket-badge">✅ CONFIRMED</span>
+        <h1>Booking Confirmed!</h1>
+        <p>See you on the pitch, <strong><%= booking.customerName %></strong>!</p>
+      </div>
+
+      <% if (typeof paid !== 'undefined' && paid) { %>
+        <div class="alert alert-success">✅ Payment received — you're all set!</div>
+      <% } %>
+
+      <div class="ticket-body">
+        <div class="ticket-row"><span>🎫 Booking ID</span><strong><%= booking.id %></strong></div>
+        <div class="ticket-row"><span>🏟️ Ground</span><strong><%= booking.groundName %></strong></div>
+        <div class="ticket-row"><span>📅 Date</span><strong><%= booking.bookingDate %></strong></div>
+        <div class="ticket-row"><span>⏰ Time Slot</span><strong><%= booking.timeSlot %></strong></div>
+        <div class="ticket-row"><span>📞 Mobile</span><strong><%= booking.mobile %></strong></div>
+        <div class="ticket-row"><span>💵 Payment</span><strong><%= booking.payment %></strong></div>
+        <div class="ticket-row">
+          <span>💳 Payment Status</span>
+          <strong class="<%= booking.paymentStatus === 'Received' ? 'status-confirmed' : '' %>">
+            <%= booking.paymentStatus %>
+          </strong>
+        </div>
+        <div class="ticket-row"><span>🔖 Status</span><strong class="status-confirmed">Confirmed</strong></div>
+      </div>
+      <div class="ticket-footer">
+        <% if (booking.paymentStatus !== 'Received') { %>
+          <p>⚠️ Please pay online now, or pay ₹600 at the venue.</p>
+        <% } else { %>
+          <p>🎉 Payment done — just show up and play!</p>
+        <% } %>
+        <div class="ticket-actions">
+          <% if (booking.paymentStatus !== 'Received') { %>
+            <a href="/pay/<%= booking.id %>" class="btn-primary">Pay Now →</a>
+          <% } %>
+          <a href="/book" class="btn-secondary">Book Another Slot</a>
+          <a href="/bookings" class="btn-primary">My Bookings</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>🏏 Cricket Turf Booking &copy; 2024</p>
+  </footer>
+</body>
+</html>

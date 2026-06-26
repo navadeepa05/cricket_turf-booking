@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Choose a Ground – Cricket Turf</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="page-container">
+    <div class="page-header" style="justify-content:center; text-align:center; flex-direction:column;">
+      <h1>🏟️ Choose Your Ground</h1>
+      <p>Pick a location to see available time slots</p>
+    </div>
+
+    <div class="ground-grid">
+      <% grounds.forEach(function(g) { %>
+        <div class="ground-card">
+          <div class="ground-card-banner" style="background: <%= g.color %>1a;">
+            <span><%= g.icon %></span>
+          </div>
+          <div class="ground-card-body">
+            <h3><%= g.name %></h3>
+            <p class="ground-card-address">📍 <%= g.address %></p>
+            <p class="ground-card-desc"><%= g.description %></p>
+            <a href="/book/<%= g.id %>" class="btn-primary btn-full">Select This Ground →</a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>🏏 Cricket Turf Booking &copy; 2024</p>
+  </footer>
+</body>
+</html>

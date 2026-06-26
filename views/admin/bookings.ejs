@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookings – Admin</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+  <%- include('../partials/navbar') %>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-title">Admin Panel</div>
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard" class="sidebar-link">🏠 Dashboard</a>
+        <a href="/admin/bookings"  class="sidebar-link active">📋 Bookings</a>
+        <a href="/admin/payments"  class="sidebar-link">💰 Payments</a>
+        <a href="/admin/customers" class="sidebar-link">👥 Customers</a>
+        <a href="/admin/slots"     class="sidebar-link">⏰ Manage Slots</a>
+        <a href="/logout"          class="sidebar-link sidebar-logout">🚪 Logout</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h1>📋 All Bookings</h1>
+        <p><%= bookings.length %> total booking(s)</p>
+      </div>
+
+      <% if (bookings.length === 0) { %>
+        <div class="empty-state"><p>No bookings yet.</p></div>
+      <% } else { %>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Customer</th><th>Mobile</th><th>Ground</th>
+                <th>Date</th><th>Slot</th><th>Payment</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% bookings.forEach(function(b) { %>
+                <tr>
+                  <td><code><%= b.id %></code></td>
+                  <td><%= b.customerName %></td>
+                  <td><%= b.mobile %></td>
+                  <td><%= b.groundName || '—' %></td>
+                  <td><%= b.bookingDate %></td>
+                  <td><%= b.timeSlot %></td>
+                  <td><span class="badge badge-<%= b.paymentStatus === 'Received' ? 'confirmed' : 'pending' %>"><%= b.paymentStatus %></span></td>
+                  <td><span class="badge badge-<%= b.status %>"><%= b.status %></span></td>
+                  <td class="action-cell">
+                    <% if (b.status !== 'cancelled') { %>
+                      <form action="/admin/bookings/<%= b.id %>/cancel" method="POST" style="display:inline">
+                        <button class="btn-sm btn-warn" onclick="return confirm('Cancel this booking?')">Cancel</button>
+                      </form>
+                    <% } %>
+                    <form action="/admin/bookings/<%= b.id %>/delete" method="POST" style="display:inline">
+                      <button class="btn-sm btn-danger" onclick="return confirm('Delete this booking permanently?')">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </main>
+  </div>
+</body>
+</html>

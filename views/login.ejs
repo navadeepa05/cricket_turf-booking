@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – Cricket Turf Booking</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="login-body">
+
+<div class="login-wrap">
+
+  <!-- LEFT PANEL: Cricket illustration -->
+  <div class="login-left">
+
+    <!-- Cricket ground SVG with woman + man players -->
+    <svg viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg" class="login-svg">
+      <defs>
+        <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#071a2e"/>
+          <stop offset="100%" stop-color="#0f3460"/>
+        </linearGradient>
+        <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#1d5c3a"/>
+          <stop offset="100%" stop-color="#0f3320"/>
+        </linearGradient>
+        <radialGradient id="glow1" cx="25%" cy="10%" r="40%">
+          <stop offset="0%"   stop-color="#ffe066" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#071a2e" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glow2" cx="75%" cy="10%" r="40%">
+          <stop offset="0%"   stop-color="#ffe066" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#071a2e" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Sky -->
+      <rect width="400" height="520" fill="url(#nightSky)"/>
+      <ellipse cx="100" cy="60" rx="160" ry="130" fill="url(#glow1)"/>
+      <ellipse cx="300" cy="60" rx="160" ry="130" fill="url(#glow2)"/>
+
+      <!-- Stars -->
+      <circle cx="40"  cy="30" r="1.2" fill="white" opacity="0.8"/>
+      <circle cx="80"  cy="18" r="1"   fill="white" opacity="0.6"/>
+      <circle cx="160" cy="25" r="1.4" fill="white" opacity="0.9"/>
+      <circle cx="240" cy="15" r="1"   fill="white" opacity="0.7"/>
+      <circle cx="320" cy="28" r="1.3" fill="white" opacity="0.8"/>
+      <circle cx="370" cy="18" r="1"   fill="white" opacity="0.6"/>
+      <circle cx="350" cy="45" r="0.9" fill="white" opacity="0.5"/>
+      <circle cx="55"  cy="55" r="0.8" fill="white" opacity="0.5"/>
+
+      <!-- Floodlight poles -->
+      <rect x="35"  y="40"  width="6" height="110" fill="#8899aa" rx="2"/>
+      <rect x="25"  y="140" width="26" height="6"  fill="#FFD60A" rx="2"/>
+      <rect x="359" y="40"  width="6" height="110" fill="#8899aa" rx="2"/>
+      <rect x="349" y="140" width="26" height="6"  fill="#FFD60A" rx="2"/>
+
+      <!-- Ground -->
+      <rect x="0" y="300" width="400" height="220" fill="url(#grass)"/>
+
+      <!-- Pitch -->
+      <rect x="150" y="258" width="100" height="55" fill="#c4a45a" rx="3" opacity="0.85"/>
+      <!-- Crease lines -->
+      <line x1="150" y1="268" x2="250" y2="268" stroke="white" stroke-width="2" opacity="0.9"/>
+      <line x1="150" y1="305" x2="250" y2="305" stroke="white" stroke-width="2" opacity="0.9"/>
+
+      <!-- Stumps LEFT -->
+      <rect x="162" y="244" width="4" height="26" fill="white" rx="1"/>
+      <rect x="172" y="244" width="4" height="26" fill="white" rx="1"/>
+      <rect x="182" y="244" width="4" height="26" fill="white" rx="1"/>
+      <rect x="160" y="242" width="28" height="4"  fill="#c4a45a" rx="1"/>
+
+      <!-- Stumps RIGHT -->
+      <rect x="218" y="244" width="4" height="26" fill="white" rx="1"/>
+      <rect x="228" y="244" width="4" height="26" fill="white" rx="1"/>
+      <rect x="238" y="244" width="4" height="26" fill="white" rx="1"/>
+      <rect x="216" y="242" width="28" height="4"  fill="#c4a45a" rx="1"/>
+
+      <!-- ===== WOMAN BATTER (left) ===== -->
+      <!-- Jersey -->
+      <ellipse cx="115" cy="252" rx="20" ry="24" fill="#e63946"/>
+      <!-- Head / skin -->
+      <circle  cx="115" cy="222" r="17"  fill="#c68642"/>
+      <!-- Long hair -->
+      <ellipse cx="115" cy="214" rx="18" ry="10" fill="#1a0800"/>
+      <rect    x="97"  y="214"  width="6"  height="22" fill="#1a0800" rx="3"/>
+      <rect    x="132" y="214"  width="6"  height="22" fill="#1a0800" rx="3"/>
+      <!-- Helmet -->
+      <ellipse cx="115" cy="212" rx="17" ry="9"  fill="#7b1d1d"/>
+      <rect    x="98"  y="218"  width="34" height="7" fill="#7b1d1d" rx="2"/>
+      <!-- Face grill -->
+      <rect    x="102" y="220"  width="20" height="10" fill="none" stroke="#FFD60A" stroke-width="1.5" rx="2"/>
+      <!-- Batting arm + bat -->
+      <line x1="128" y1="240" x2="158" y2="212" stroke="#c68642" stroke-width="6" stroke-linecap="round"/>
+      <rect x="152" y="196" width="11" height="46" fill="#c4a45a" rx="3" transform="rotate(-25 157 220)"/>
+      <!-- Other arm -->
+      <line x1="102" y1="245" x2="85"  y2="260" stroke="#c68642" stroke-width="5" stroke-linecap="round"/>
+      <!-- Legs -->
+      <line x1="107" y1="274" x2="98"  y2="318" stroke="#e63946" stroke-width="8" stroke-linecap="round"/>
+      <line x1="123" y1="274" x2="130" y2="318" stroke="#e63946" stroke-width="8" stroke-linecap="round"/>
+      <!-- Pads -->
+      <rect x="89"  y="300" width="16" height="22" fill="white" rx="4"/>
+      <rect x="122" y="300" width="16" height="22" fill="white" rx="4"/>
+      <!-- Jersey number -->
+      <text x="115" y="258" text-anchor="middle" fill="white" font-size="11" font-weight="bold">7</text>
+      <!-- Name label -->
+      <rect x="74" y="330" width="82" height="18" fill="#FFD60A" rx="5"/>
+      <text x="115" y="343" text-anchor="middle" fill="#1B4332" font-size="9" font-weight="800">PRIYA  (BAT)</text>
+
+      <!-- ===== MAN BOWLER (right) ===== -->
+      <!-- Jersey -->
+      <ellipse cx="285" cy="248" rx="20" ry="24" fill="#0077b6"/>
+      <!-- Head / skin -->
+      <circle  cx="285" cy="218" r="16"  fill="#8d5524"/>
+      <!-- Short hair -->
+      <ellipse cx="285" cy="210" rx="16" ry="7"  fill="#1a0800"/>
+      <!-- Helmet -->
+      <ellipse cx="285" cy="208" rx="16" ry="8"  fill="#023e8a"/>
+      <rect    x="269" y="214"  width="32" height="6" fill="#023e8a" rx="2"/>
+      <!-- Bowling arm raised -->
+      <line x1="272" y1="236" x2="248" y2="198" stroke="#8d5524" stroke-width="6" stroke-linecap="round"/>
+      <!-- Ball -->
+      <circle  cx="244" cy="193" r="9" fill="#c0392b"/>
+      <line    x1="240" y1="193" x2="248" y2="193" stroke="#7b0000" stroke-width="1.5"/>
+      <line    x1="244" y1="189" x2="244" y2="197" stroke="#7b0000" stroke-width="1.5"/>
+      <!-- Other arm for balance -->
+      <line x1="298" y1="240" x2="316" y2="258" stroke="#8d5524" stroke-width="5" stroke-linecap="round"/>
+      <!-- Legs (running stride) -->
+      <line x1="277" y1="270" x2="262" y2="316" stroke="#0077b6" stroke-width="8" stroke-linecap="round"/>
+      <line x1="293" y1="270" x2="306" y2="310" stroke="#0077b6" stroke-width="8" stroke-linecap="round"/>
+      <!-- Shoes -->
+      <ellipse cx="260" cy="318" rx="12" ry="5" fill="#1a0800"/>
+      <ellipse cx="307" cy="312" rx="12" ry="5" fill="#1a0800"/>
+      <!-- Jersey number -->
+      <text x="285" y="254" text-anchor="middle" fill="white" font-size="11" font-weight="bold">11</text>
+      <!-- Name label -->
+      <rect x="244" y="326" width="82" height="18" fill="#FFD60A" rx="5"/>
+      <text x="285" y="339" text-anchor="middle" fill="#1B4332" font-size="9" font-weight="800">RAHUL (BOWL)</text>
+
+      <!-- ===== WOMAN FIELDER (background centre) ===== -->
+      <ellipse cx="200" cy="390" rx="15" ry="18" fill="#2a9d8f"/>
+      <circle  cx="200" cy="370" r="13"  fill="#c68642"/>
+      <!-- Ponytail -->
+      <ellipse cx="200" cy="362" rx="13" ry="6" fill="#1a0800"/>
+      <line    x1="209" y1="364" x2="216" y2="378" stroke="#1a0800" stroke-width="4" stroke-linecap="round"/>
+      <!-- Arms fielding -->
+      <line x1="187" y1="384" x2="168" y2="372" stroke="#c68642" stroke-width="4" stroke-linecap="round"/>
+      <line x1="213" y1="384" x2="232" y2="372" stroke="#c68642" stroke-width="4" stroke-linecap="round"/>
+      <!-- Legs -->
+      <line x1="193" y1="406" x2="186" y2="435" stroke="#2a9d8f" stroke-width="7" stroke-linecap="round"/>
+      <line x1="207" y1="406" x2="214" y2="435" stroke="#2a9d8f" stroke-width="7" stroke-linecap="round"/>
+      <text x="200" y="395" text-anchor="middle" fill="white" font-size="9" font-weight="bold">5</text>
+      <rect x="162" y="443" width="76" height="16" fill="#FFD60A" rx="4"/>
+      <text x="200" y="454" text-anchor="middle" fill="#1B4332" font-size="8" font-weight="800">ANANYA (FIELD)</text>
+
+      <!-- Ground text overlay -->
+      <rect x="60" y="155" width="280" height="65" fill="#000" opacity="0.45" rx="10"/>
+      <text x="200" y="181" text-anchor="middle" fill="#FFD60A"
+            font-size="22" font-weight="bold" font-family="Oswald, sans-serif" letter-spacing="1">🏏 CRICKET TURF</text>
+      <text x="200" y="204" text-anchor="middle" fill="rgba(255,255,255,0.85)"
+            font-size="12" font-family="Inter, sans-serif">Book Your Game · Play Your Best</text>
+    </svg>
+
+  </div>
+
+  <!-- RIGHT PANEL: Login form with two tabs -->
+  <div class="login-right">
+    <div class="login-box">
+
+      <div class="login-logo">🏏</div>
+      <h1 class="login-title">Welcome Back</h1>
+      <p class="login-sub">Select your login type below</p>
+
+      <!-- Tab switcher -->
+      <div class="login-tabs">
+        <button class="login-tab <%= tab === 'customer' ? 'active' : '' %>"
+                onclick="switchTab('customer')" type="button">
+          👤 Customer
+        </button>
+        <button class="login-tab <%= tab === 'admin' ? 'active' : '' %>"
+                onclick="switchTab('admin')" type="button">
+          🔐 Admin
+        </button>
+      </div>
+
+      <% if (error) { %>
+        <div class="login-error"><%= error %></div>
+      <% } %>
+
+      <!-- CUSTOMER LOGIN FORM -->
+      <div id="panel-customer" class="tab-panel <%= tab === 'customer' ? 'active' : '' %>">
+        <p class="tab-desc">Enter your name and mobile number to book a slot.</p>
+        <form action="/login/customer" method="POST">
+          <div class="field">
+            <label>Your Name</label>
+            <input type="text" name="name" required placeholder="e.g. Rahul Sharma" autocomplete="name"/>
+          </div>
+          <div class="field">
+            <label>Mobile Number</label>
+            <input type="tel" name="mobile" required placeholder="10-digit mobile number" maxlength="10"/>
+          </div>
+          <button type="submit" class="login-btn">Enter as Customer →</button>
+        </form>
+        <p class="tab-note">No password needed. Just your name and mobile to identify you.</p>
+      </div>
+
+      <!-- ADMIN LOGIN FORM -->
+      <div id="panel-admin" class="tab-panel <%= tab === 'admin' ? 'active' : '' %>">
+        <p class="tab-desc">Admin access to manage bookings, payments, slots and customers.</p>
+        <form action="/login/admin" method="POST">
+          <div class="field">
+            <label>Admin Email</label>
+            <input type="email" name="email" required placeholder="admin@turf.com" autocomplete="email"/>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter admin password"/>
+          </div>
+          <button type="submit" class="login-btn login-btn--admin">Enter as Admin →</button>
+        </form>
+        <p class="tab-note">Default: <code>admin@turf.com</code> / <code>admin123</code></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(tab) {
+  // Update tab buttons
+  document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+</script>
+
+</body>
+</html>

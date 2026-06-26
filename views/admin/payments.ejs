@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payments – Admin</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+  <%- include('../partials/navbar') %>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-title">Admin Panel</div>
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard" class="sidebar-link">🏠 Dashboard</a>
+        <a href="/admin/bookings"  class="sidebar-link">📋 Bookings</a>
+        <a href="/admin/payments"  class="sidebar-link active">💰 Payments</a>
+        <a href="/admin/customers" class="sidebar-link">👥 Customers</a>
+        <a href="/admin/slots"     class="sidebar-link">⏰ Manage Slots</a>
+        <a href="/logout"          class="sidebar-link sidebar-logout">🚪 Logout</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h1>💰 Payments</h1>
+        <p>Track venue payments — all bookings are "Pay at Venue"</p>
+      </div>
+
+      <%
+        const totalRevenue = bookings.filter(b => b.paymentStatus === 'Received').length * 600;
+        const pending = bookings.filter(b => b.paymentStatus === 'Pending' && b.status !== 'cancelled').length;
+        const received = bookings.filter(b => b.paymentStatus === 'Received').length;
+      %>
+
+      <div class="admin-stats">
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">✅</div>
+          <div class="stat-card-num"><%= received %></div>
+          <div class="stat-card-label">Payments Received</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">⏳</div>
+          <div class="stat-card-num"><%= pending %></div>
+          <div class="stat-card-label">Pending</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">💵</div>
+          <div class="stat-card-num">₹<%= totalRevenue %></div>
+          <div class="stat-card-label">Revenue Collected</div>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr><th>Booking ID</th><th>Customer</th><th>Date</th><th>Slot</th><th>Amount</th><th>Payment Status</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <% bookings.forEach(function(b) { %>
+              <% if (b.status !== 'cancelled') { %>
+              <tr>
+                <td><code><%= b.id %></code></td>
+                <td><%= b.customerName %></td>
+                <td><%= b.bookingDate %></td>
+                <td><%= b.timeSlot %></td>
+                <td><strong>₹600</strong></td>
+                <td><span class="badge badge-<%= b.paymentStatus === 'Received' ? 'confirmed' : 'pending' %>"><%= b.paymentStatus %></span></td>
+                <td>
+                  <% if (b.paymentStatus !== 'Received') { %>
+                    <form action="/admin/payments/<%= b.id %>/mark-paid" method="POST">
+                      <button class="btn-sm btn-success">Mark Received ✓</button>
+                    </form>
+                  <% } else { %>
+                    <span class="text-muted">—</span>
+                  <% } %>
+                </td>
+              </tr>
+              <% } %>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

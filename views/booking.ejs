@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Slot – Cricket Turf</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="page-container">
+    <div class="form-card">
+      <div class="form-card-header">
+        <h1>📅 Book Your Slot</h1>
+        <p>Fill in the details below to confirm your booking</p>
+      </div>
+
+      <div class="payment-info-box" style="margin-bottom:1.25rem;">
+        <div class="payment-icon"><%= ground.icon %></div>
+        <div>
+          <strong><%= ground.name %></strong>
+          <p>📍 <%= ground.address %> &nbsp;|&nbsp; <a href="/book">Change Ground</a></p>
+        </div>
+      </div>
+
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <form action="/book/<%= ground.id %>" method="POST" class="booking-form">
+        <div class="form-group">
+          <label>Customer Name</label>
+          <input type="text" name="customerName" required placeholder="Your full name"/>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" name="mobile" required placeholder="10-digit Indian mobile number" maxlength="10"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Booking Date</label>
+            <input type="date" name="bookingDate" required min="<%= new Date().toISOString().split('T')[0] %>"/>
+          </div>
+          <div class="form-group">
+            <label>Time Slot</label>
+            <select name="timeSlot" required>
+              <option value="">-- Select a slot --</option>
+              <% slots.forEach(function(slot) { %>
+                <option value="<%= slot %>"><%= slot %></option>
+              <% }); %>
+            </select>
+          </div>
+        </div>
+
+        <div class="payment-info-box">
+          <div class="payment-icon">💵</div>
+          <div>
+            <strong>Payment: Pay at Venue</strong>
+            <p>₹600/hr — Collect your ticket and pay when you arrive at the ground.</p>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary btn-full">Confirm Booking →</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>🏏 Cricket Turf Booking &copy; 2024</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard – Cricket Turf</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+  <%- include('../partials/navbar') %>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-title">Admin Panel</div>
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard" class="sidebar-link active">🏠 Dashboard</a>
+        <a href="/admin/bookings"  class="sidebar-link">📋 Bookings</a>
+        <a href="/admin/payments"  class="sidebar-link">💰 Payments</a>
+        <a href="/admin/customers" class="sidebar-link">👥 Customers</a>
+        <a href="/admin/slots"     class="sidebar-link">⏰ Manage Slots</a>
+        <a href="/logout"          class="sidebar-link sidebar-logout">🚪 Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <h1>Dashboard</h1>
+        <p>Welcome back, <strong><%= user.name %></strong> 👋</p>
+      </div>
+
+      <!-- Stats cards -->
+      <div class="admin-stats">
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">📋</div>
+          <div class="stat-card-num"><%= stats.total %></div>
+          <div class="stat-card-label">Total Bookings</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">✅</div>
+          <div class="stat-card-num"><%= stats.confirmed %></div>
+          <div class="stat-card-label">Confirmed</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">❌</div>
+          <div class="stat-card-num"><%= stats.cancelled %></div>
+          <div class="stat-card-label">Cancelled</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="stat-card-icon">👥</div>
+          <div class="stat-card-num"><%= stats.customers %></div>
+          <div class="stat-card-label">Customers</div>
+        </div>
+      </div>
+
+      <!-- Recent bookings -->
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <h2>Recent Bookings</h2>
+          <a href="/admin/bookings" class="btn-sm">View All →</a>
+        </div>
+        <% if (recent.length === 0) { %>
+          <p class="empty-msg">No bookings yet.</p>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>ID</th><th>Customer</th><th>Date</th><th>Slot</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <% recent.forEach(function(b) { %>
+                  <tr>
+                    <td><code><%= b.id %></code></td>
+                    <td><%= b.customerName %></td>
+                    <td><%= b.bookingDate %></td>
+                    <td><%= b.timeSlot %></td>
+                    <td><span class="badge badge-<%= b.status %>"><%= b.status %></span></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Quick links -->
+      <div class="quick-links">
+        <a href="/admin/bookings"  class="quick-link-card">📋<span>All Bookings</span></a>
+        <a href="/admin/payments"  class="quick-link-card">💰<span>Payments</span></a>
+        <a href="/admin/customers" class="quick-link-card">👥<span>Customers</span></a>
+        <a href="/admin/slots"     class="quick-link-card">⏰<span>Slots</span></a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pay for Booking – Cricket Turf</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="page-container">
+    <div class="form-card">
+      <div class="form-card-header">
+        <h1>💳 Pay for Your Booking</h1>
+        <p>This is a mock payment screen — no real money is charged.</p>
+      </div>
+
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="ticket-body" style="margin-bottom: 1.5rem;">
+        <div class="ticket-row"><span>🎫 Booking ID</span><strong><%= booking.id %></strong></div>
+        <div class="ticket-row"><span>📅 Date</span><strong><%= booking.bookingDate %></strong></div>
+        <div class="ticket-row"><span>⏰ Time Slot</span><strong><%= booking.timeSlot %></strong></div>
+        <div class="ticket-row"><span>💰 Amount Due</span><strong>₹600</strong></div>
+      </div>
+
+      <form action="/pay/<%= booking.id %>" method="POST">
+        <div class="form-group">
+          <label>Card Number (mock — any digits work)</label>
+          <input type="text" placeholder="4242 4242 4242 4242" maxlength="19"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Expiry</label>
+            <input type="text" placeholder="MM/YY" maxlength="5"/>
+          </div>
+          <div class="form-group">
+            <label>CVV</label>
+            <input type="text" placeholder="123" maxlength="3"/>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Pay ₹600 Now →</button>
+      </form>
+      <p style="margin-top:1rem; font-size:0.85rem; color:#888;">
+        🔒 This is a simulated payment for demo purposes — it always succeeds and no real card details are checked or stored.
+      </p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>🏏 Cricket Turf Booking &copy; 2024</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cricket Turf Booking</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">⚡ Floodlit Night Games Available</p>
+      <h1 class="hero-title">Book Your<br/><span class="hero-accent">Cricket Turf</span><br/>Today</h1>
+      <p class="hero-sub">Premium cricket ground with professional pitch, floodlights & changing rooms</p>
+      <div class="hero-actions">
+        <% if (user) { %>
+          <a href="/book" class="btn-primary">Book a Slot →</a>
+          <% if (user.role === 'customer') { %>
+            <a href="/bookings" class="btn-ghost">My Bookings</a>
+          <% } else { %>
+            <a href="/admin/dashboard" class="btn-ghost">Admin Panel</a>
+          <% } %>
+        <% } else { %>
+          <a href="/login" class="btn-primary">Get Started →</a>
+          <a href="/login" class="btn-ghost">Login</a>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Hero cricket SVG -->
+    <div class="hero-visual">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+        <defs>
+          <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFD60A" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#1B4332" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="150" cy="150" r="140" fill="url(#heroGlow)"/>
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-dasharray="8 4"/>
+        <!-- Ball -->
+        <circle cx="150" cy="90" r="35" fill="#C0392B"/>
+        <path d="M 118 80 Q 150 100 182 80" stroke="#8B0000" stroke-width="2" fill="none"/>
+        <path d="M 115 95 Q 150 75 185 95" stroke="#8B0000" stroke-width="2" fill="none"/>
+        <!-- Bat -->
+        <rect x="138" y="130" width="24" height="80" fill="#C8A96E" rx="4"/>
+        <rect x="143" y="120" width="14" height="18" fill="#8B6914" rx="2"/>
+        <!-- Stars -->
+        <text x="60" y="80" font-size="18" fill="#FFD60A">★</text>
+        <text x="220" y="80" font-size="18" fill="#FFD60A">★</text>
+        <text x="40" y="170" font-size="14" fill="#FFD60A">★</text>
+        <text x="240" y="170" font-size="14" fill="#FFD60A">★</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <section class="stats-strip">
+    <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Games Played</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Time Slots Daily</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Floodlit</span></div>
+    <div class="stat"><span class="stat-num">₹600</span><span class="stat-label">Per Hour</span></div>
+  </section>
+
+  <!-- Available Slots -->
+  <section class="slots-section">
+    <h2 class="section-title">Available Time Slots</h2>
+    <div class="slots-grid">
+      <% slots.forEach(function(slot) { %>
+        <div class="slot-card">
+          <span class="slot-icon">⏰</span>
+          <span class="slot-time"><%= slot %></span>
+        </div>
+      <% }); %>
+    </div>
+    <div class="slots-cta">
+      <% if (!user) { %>
+        <a href="/login" class="btn-primary">Login to Book →</a>
+      <% } else if (user.role === 'customer') { %>
+        <a href="/book" class="btn-primary">Book a Slot →</a>
+      <% } %>
+    </div>
+  </section>
+
+  <!-- Our Grounds -->
+  <section class="slots-section">
+    <h2 class="section-title">Our Grounds</h2>
+    <div class="ground-grid" style="margin-top:1.5rem;">
+      <% grounds.forEach(function(g) { %>
+        <div class="ground-card">
+          <div class="ground-card-banner" style="background: <%= g.color %>1a; height:110px; font-size:2.8rem; display:flex; align-items:center; justify-content:center;">
+            <span><%= g.icon %></span>
+          </div>
+          <div class="ground-card-body" style="padding:1.25rem;">
+            <h3 style="margin:0 0 0.25rem; font-family: var(--font-display);"><%= g.name %></h3>
+            <p style="color:#777; font-size:0.85rem; margin-bottom:0;">📍 <%= g.address %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <h2 class="section-title">Why Book With Us?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏟️</div>
+        <h3>Professional Pitch</h3>
+        <p>Well-maintained turf with proper crease markings and pitch preparation.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💡</div>
+        <h3>Floodlit Ground</h3>
+        <p>Play day or night with our high-quality floodlighting system.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚿</div>
+        <h3>Changing Rooms</h3>
+        <p>Clean changing rooms and shower facilities available for all players.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Easy Booking</h3>
+        <p>Book online in seconds, confirm instantly, pay at the venue.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>🏏 Cricket Turf Booking &copy; 2024 &nbsp;|&nbsp; Pay at Venue &nbsp;|&nbsp; <a href="/login">Admin Login</a></p>
+  </footer>
+</body>
+</html>
